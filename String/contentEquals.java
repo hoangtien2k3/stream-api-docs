@@ -12,6 +12,12 @@ public class contentEquals {
 
         StringBuilder stringBuilder = new StringBuilder("Hello");
 
+        if (str1 == str2) {
+            System.out.println("str1 == str2");
+        } else {
+            System.out.println("str1 != str2");
+        }
+
         // So sánh str1 với str2
         boolean result1 = str1.contentEquals(str2);
         System.out.println("str1 content equals str2: " + result1);

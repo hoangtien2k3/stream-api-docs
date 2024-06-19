@@ -15,7 +15,7 @@ public class forEachOrdered {
 
         // VD2:
         // Danh sách các từ
-        String[] words = {"apple", "banana", "orange", "grape", "kiwi"};
+        String[] words = {"banana", "apple", "grape", "kiwi", "orange"};
 
         // In ra các từ theo thứ tự từ điển, sử dụng song song xử lý
         Arrays.asList(words)

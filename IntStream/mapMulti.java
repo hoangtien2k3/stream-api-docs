@@ -11,9 +11,10 @@ public class mapMulti {
 
         // Sử dụng mapMulti để chuyển đổi mỗi số thành các số từ 1 đến số đó
         IntStream mappedStream = intStream.mapMulti((value, consumer) -> {
-            for (int i = 1; i <= value; i++) {
-                consumer.accept(i);
-            }
+//            for (int i = 1; i <= value; i++) {
+//                consumer.accept(i);
+//            }
+            IntStream.rangeClosed(1, value).forEach(consumer);
         });
 
         // In ra các số đã được chuyển đổi

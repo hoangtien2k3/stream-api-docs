@@ -1,0 +1,63 @@
++ bảng Ord_sys_config
+    1.LIST_ORDER_TYPE_CODE
+    2.SỐ NGÀY QUÁ HẠN THÌ HUỶ (N)
+    3. X giờ trước ngày N để gửi tin nhắn
+
++ SMS_CONTENT
+    1. Cấu hình tin nhắn (lên web)
+
++ Producer
+    1. Sql: lấy bảng orders và order_type để lấy ra danh sách đơn hàng với điều kiện
+    + điều kiện loại đơn hàng (Code)
+
+    create_date | + from_date: Ngày N - X giờ
+                | + to_date: Ngày N
+
+    -> Orders
+
++ Consumer:
+    + gửi tin nhắn cho từng order trong danh sách Orders
+    {
+        0. c
+        1. bpId
+        2. X giờ
+    }
+
+   sms_se.getContent:
+    + ta: orde.gerTarget -> Const.SMS
+
+
+
+
+
+//
+SELECT *
+FROM BCCS_ORDER.ORDERS o
+JOIN BCCS_ORDER.ORDER_TYPE ot ON o.ORDER_TYPE_ID = ot.ORDER_TYPE_ID
+WHERE o.STATE = 1
+  AND o.CREATE_DATE >= :minDate
+  AND o.CREATE_DATE <= (:minDate + INTERVAL '6' DAY)
+  AND o.BP_STATE IN (:lstBpState)
+  AND ot.CODE = :otCode
+  AND NOT EXISTS (
+      SELECT 1
+      FROM BCCS_ORDER.CANCELLED_ORDERS co
+      WHERE co.ORDER_ID = o.ORDER_ID
+  );
+
+
+
+
+
+// Lấy ngày hiện tại
+        Date now = new Date();
+
+        // Tạo một đối tượng Calendar từ ngày hiện tại
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(now);
+
+        // Thêm 6 ngày vào ngày hiện tại
+        calendar.add(Calendar.DAY_OF_YEAR, 6);
+
+        // Lấy ngày sau 6 ngày
+        Date dateAfter6Days = calendar.getTime();

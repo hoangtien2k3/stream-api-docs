@@ -20,7 +20,10 @@ public class flatMap {
                 .flatMap(word -> word.chars().mapToObj(c -> (char) c));
 
         // In ra các ký tự từ luồng duy nhất
-        characters.forEach(System.out::println);
+        characters.forEach(System.out::print);
+
+
+        System.out.println("\n=====================================");
 
 
         // VD2:
@@ -31,6 +34,6 @@ public class flatMap {
                 .flatMapToInt(Arrays::stream);
 
         // In ra các số nguyên từ luồng duy nhất
-        integerStream.forEach(System.out::println);
+        integerStream.forEach(System.out::print);
     }
 }

@@ -6,10 +6,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * bỏ qua các phần tử đầu tiên của một luồng dữ liệu cho đến khi một điều kiện nhất định không còn đúng nữa
- *
  * IntStream dropWhile(IntPredicate predicate)
- * */
+ * <p>
+ * = Sử dụng khi bạn muốn bỏ qua các phần tử đầu tiên thỏa mãn điều kiện và giữ lại phần còn lại của stream bắt đầu từ phần tử không thỏa mãn điều kiện đầu tiên.
+ */
 public class dropWhile {
     public static void main(String[] args) {
         // Tạo một IntStream chứa các số nguyên từ 1 đến 10
