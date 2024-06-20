@@ -16,3 +16,5 @@ int sum = widgets.stream()
         .mapToInt(w -> w.getWeight())
         .sum();
 ```
+
+## thay doi
