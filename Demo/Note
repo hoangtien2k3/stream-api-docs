@@ -47,6 +47,18 @@ WHERE o.STATE = 1
 
 
 
+//
+SELECT *
+FROM BCCS_ORDER.ORDERS o
+JOIN BCCS_ORDER.ORDER_TYPE ot ON o.ORDER_TYPE_ID = ot.ORDER_TYPE_ID
+WHERE o.STATE = 1
+  AND o.CREATE_DATE < (SYSDATE - INTERVAL '6' DAY)  -- Đơn hàng ít nhất đã tạo được 6 ngày
+  AND o.CREATE_DATE > (SYSDATE - INTERVAL '7' DAY)  -- Đơn hàng chưa quá 7 ngày
+  AND o.CREATE_DATE < (SYSDATE - INTERVAL '6' DAY + INTERVAL :hoursLeft HOUR) -- Đơn hàng còn X giờ để hết 7 ngày
+  AND o.BP_STATE IN (:lstBpState)
+  AND ot.CODE = :otCode
+
+
 
 
 // Lấy ngày hiện tại
