@@ -1,3 +1,18 @@
+YÊU CẦU:
+Dựng tiến trình cảnh báo đơn hàng:
+
+Loại đơn: đấu nối, gia hạn, đổi gói CA hiện tại có giới hạn 7 ngày nếu không hoàn thành huỷ đơn.
+
+=> Bổ sung tiến trình quét đơn hàng còn X giờ chưa hoàn thành quá hạn huỷ đơn hàng thì gửi cảnh báo cho AM như sau:
+
+Alias: 155
+Nội dung: "Doi chi con ton don hang {loai don hang} xxx chưa hoan thanh. Don hang se bị huy sau X gio. Trân trong!"
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 + bảng Ord_sys_config
     1.LIST_ORDER_TYPE_CODE
     2.SỐ NGÀY QUÁ HẠN THÌ HUỶ (N)
@@ -28,7 +43,7 @@
 
 
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //
 SELECT *
@@ -47,7 +62,9 @@ WHERE o.STATE = 1
 
 
 
-//
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 SELECT *
 FROM BCCS_ORDER.ORDERS o
 JOIN BCCS_ORDER.ORDER_TYPE ot ON o.ORDER_TYPE_ID = ot.ORDER_TYPE_ID
@@ -59,7 +76,7 @@ WHERE o.STATE = 1
   AND ot.CODE = :otCode
 
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Lấy ngày hiện tại
         Date now = new Date();
@@ -73,3 +90,10 @@ WHERE o.STATE = 1
 
         // Lấy ngày sau 6 ngày
         Date dateAfter6Days = calendar.getTime();
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+List<String> lstBpState = ordSysConfigRepo.getListValueBySplitter(Const.OrdSysCfg.LIST_BP_STATE_CANCEL_CA_CONFIG, ...);
+if (DataUtil.isNullOrEmpty(lstBpState)) return;
